@@ -45,4 +45,8 @@ class Grid:
         return columns
     
     def __repr__(self):
-        return ""
+        temp = copy.deepcopy(self.inputs)
+        for i in range(self.size):
+            for j in range(self.size):
+                print(str(temp.pop(0)).strip("\n"))
+            print("\n")

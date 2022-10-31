@@ -9,6 +9,7 @@ try:
     #print(grid.get_size())
     #print(grid.get_rows())
     #print(grid.get_columns())
+    grid.__repr__()
 
     
     
