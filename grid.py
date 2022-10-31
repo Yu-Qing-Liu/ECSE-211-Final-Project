@@ -1,5 +1,8 @@
+#Imports
 import math
 import copy
+import itertools
+from coordinate import Coordinate
 
 class Grid:
     #Constructor
@@ -43,10 +46,28 @@ class Grid:
                 k += self.size
             columns.append(column)
         return columns
-    
-    def __repr__(self):
-        temp = copy.deepcopy(self.inputs)
-        for i in range(self.size):
-            for j in range(self.size):
-                print(str(temp.pop(0)).strip("\n"))
-            print("\n")
+
+    #Returns a list of all the block coordinates
+    def get_coords(self):
+
+        rows = self.get_rows()
+        coords = []
+
+        #Loops through all inputs, filters and transforms inputs into coordinates
+        y = self.size - 1
+        for row in rows:
+            for x,elem in enumerate(row):
+                if elem == 1:
+                    coords.insert(0,Coordinate(x,y))
+                else:
+                    coords.insert(0,None)
+            y += -1
+
+        coords = [i for i in coords if i is not None]
+
+        return coords
+
+
+        
+            
+
