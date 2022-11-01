@@ -31,7 +31,7 @@ class Grid:
             row = []
             for j in range(self.size):
                 row.append(temp.pop(0))
-            rows.append(row)
+            rows.insert(0,row)
         return rows
 
     #Returns a list of the grid's columns
@@ -44,28 +44,51 @@ class Grid:
             for j in range(self.size):
                 column.append(temp[k])
                 k += self.size
-            columns.append(column)
+            columns.insert(0,column)
         return columns
 
     #Returns a list of all the block coordinates
-    def get_coords(self):
+    def get_coords(self,direction):
+        """Returns a list of coordinates of block placement, takes in a string parameter <row> or <col>
+            Row mode : Horizontal block placement starting at (4,4)
+            Column mode: Vertical block placement starting at (4,4)
+        """
 
-        rows = self.get_rows()
         coords = []
 
-        #Loops through all inputs, filters and transforms inputs into coordinates
-        y = self.size - 1
-        for row in rows:
-            for x,elem in enumerate(row):
-                if elem == 1:
-                    coords.insert(0,Coordinate(x,y))
-                else:
-                    coords.insert(0,None)
-            y += -1
+        if direction == "row":
+            rows = self.get_rows()
 
-        coords = [i for i in coords if i is not None]
+            #Loops through all inputs, filters and transforms inputs into coordinates
+            y = self.size - 1
+            for row in rows:
+                x = self.size - 1
+                for elem in row:
+                    if elem == 1:
+                        coords.append(Coordinate(x,y))
+                        x += -1
+                    else:
+                        x += -1
+                y += -1
 
-        return coords
+            return coords
+
+        elif direction == "col":
+            cols = self.get_columns()
+
+            #Loops through all inputs, filters and transforms inputs into coordinates
+            x = self.size - 1
+            for col in cols:
+                y = self.size - 1
+                for elem in col:
+                    if elem == 1:
+                        coords.append(Coordinate(x,y))
+                        y += -1
+                    else:
+                        y += -1
+                x += -1
+
+            return coords
 
 
         
