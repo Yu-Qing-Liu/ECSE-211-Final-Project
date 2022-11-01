@@ -1,7 +1,6 @@
 #Imports
 import math
 import copy
-import itertools
 from coordinate import Coordinate
 
 class Grid:
