@@ -1,5 +1,5 @@
 #Imports
-from grid import Grid
+from objects.grid import Grid
 
 try:
     #grid = Grid([0,0,1,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0,0,1,0,0])
