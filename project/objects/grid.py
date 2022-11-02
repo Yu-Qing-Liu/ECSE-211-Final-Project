@@ -1,7 +1,7 @@
 #Imports
 import math
 import copy
-from coordinate import Coordinate
+from objects.coordinate import Coordinate
 
 class Grid:
     #Constructor
