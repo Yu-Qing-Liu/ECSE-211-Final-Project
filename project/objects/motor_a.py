@@ -1,6 +1,8 @@
 from utils.brick import Motor
 import time
 
+#The object Motor_A represents the motor used in horizontal pushing.
+#Contains push method that rotates the motor based on commands
 class Motor_A:
     #Constructor
     def __init__(self):
