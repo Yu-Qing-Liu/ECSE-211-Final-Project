@@ -8,6 +8,6 @@ class Motor_B:
         self.motor = Motor("B")
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
-    def push(command):
+    def push(self,command):
         print("Pushing the block vertically to position", command)
         #@Todo : implement the correct movements given the command
