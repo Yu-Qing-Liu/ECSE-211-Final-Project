@@ -4,7 +4,6 @@ from objects.motor_a import Motor_A
 from objects.motor_b import Motor_B
 #Brick imports
 from utils.brick import reset_brick, wait_ready_sensors
-import time
 
 
 wait_ready_sensors(True)
