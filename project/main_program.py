@@ -2,6 +2,7 @@
 from objects.grid import Grid
 from objects.motor_a import Motor_A
 from objects.motor_b import Motor_B
+from objects.tower import Tower
 #Brick imports
 from utils.brick import reset_brick, wait_ready_sensors
 
@@ -12,6 +13,9 @@ try:
     #Initiate motors
     motor_a = Motor_A()
     motor_b = Motor_B()
+
+    #Initiate tower
+    cube_tower = Tower()
 
     #Initiate a test Grid
     grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1])
@@ -37,6 +41,10 @@ try:
     while commands:
         #Store the poped coordinate into a variable called command
         command = commands.pop(0)
+
+        #Have the cube tower dispense 1x cube
+        cube_tower.dispense()
+        
         #Check if we are on the same row
         if command.get_y() == y_init:
             #create the row
