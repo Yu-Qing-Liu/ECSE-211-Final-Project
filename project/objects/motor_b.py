@@ -1,6 +1,8 @@
 from utils.brick import Motor
 import time
 
+#The object Motor_B represents the motor responsible for vertical row pushing. Contains a push method
+#that rotates the motor based on commands.
 class Motor_B:
     #Constructor
     def __init__(self):
