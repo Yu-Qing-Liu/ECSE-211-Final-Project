@@ -9,6 +9,6 @@ class Tower:
         self.motor = Motor("C")
     
     #dispenses a cube from the tower
-    def dispense():
+    def dispense(self):
         print("Dispensing a cube")
         #@Todo : code for the dispenser mechanism
