@@ -31,66 +31,34 @@ class Grid:
             row = []
             for j in range(self.size):
                 row.append(temp.pop(0))
-            rows.insert(0,row)
+            rows.append(row)
         return rows
 
-    #Returns a list of the grid's columns
-    def get_columns(self):
-        columns = []
-        temp = copy.deepcopy(self.inputs)
-        for i in range(self.size):
-            column = []
-            k = i
-            for j in range(self.size):
-                column.append(temp[k])
-                k += self.size
-            columns.insert(0,column)
-        return columns
-
     #Returns a list of all the block coordinates
-    def get_coords(self,direction):
-        """Returns a list of coordinates of block placement, takes in a string parameter <row> or <col>
-            Row mode : Horizontal block placement starting at (4,4)
-            Column mode: Vertical block placement starting at (4,4)
-        """
+    def get_coords(self):
+        """Returns a list of coordinates of block placement"""
 
         coords = []
 
-        if direction == "row":
-            rows = self.get_rows()
+        rows = self.get_rows()
 
-            #Loops through all inputs, filters and transforms inputs into coordinates
-            y = self.size - 1
-            for row in rows:
-                x = self.size - 1
-                for elem in row:
-                    if elem == 1:
-                        coords.append(Coordinate(x,y))
-                        x += -1
-                    else:
-                        x += -1
-                y += -1
-
-            return coords
-
-        elif direction == "col":
-            cols = self.get_columns()
-
-            #Loops through all inputs, filters and transforms inputs into coordinates
+        #Loops through all inputs, filters and transforms inputs into coordinates
+        y = 0
+        for row in rows:
             x = self.size - 1
-            for col in cols:
-                y = self.size - 1
-                for elem in col:
-                    if elem == 1:
-                        coords.append(Coordinate(x,y))
-                        y += -1
-                    else:
-                        y += -1
-                x += -1
+            for elem in row:
+                if elem == 1:
+                    coords.append(Coordinate(x,y))
+                    x -= 1
+                else:
+                    x -= 1
+            y += 1
 
-            return coords
+        return coords
 
-
-        
-            
+    #Prints out the grid
+    def __repr__(self):
+        rows = self.get_rows()
+        for row in rows:
+            print(row)
 
