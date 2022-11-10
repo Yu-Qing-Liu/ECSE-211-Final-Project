@@ -18,7 +18,8 @@ try:
     cube_tower = Tower()
 
     #Initiate a test Grid
-    grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1])
+    #grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1])
+    grid = Grid([0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0])
 
     #Print out the grid
     grid.__repr__()
@@ -36,7 +37,7 @@ try:
     commands = grid.get_coords()
 
     #temp value for y
-    y_init = commands[0].get_y()
+    y_init = 0
 
     #pops the coordinates from commands list and evaluates them one by one
     while commands:

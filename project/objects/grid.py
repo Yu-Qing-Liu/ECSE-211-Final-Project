@@ -23,7 +23,7 @@ class Grid:
     def get_inputs(self):
         return self.inputs
     
-    #Returns a list of the grid's rows
+    #Returns a list of the grid's rows from 1rst row to last row
     def get_rows(self):
         rows = []
         temp = copy.deepcopy(self.inputs)
@@ -34,24 +34,33 @@ class Grid:
             rows.append(row)
         return rows
 
+    #Returns a list of the grid's rows from last row to first row
+    def get_rows_reverse(self):
+        rows = []
+        temp = copy.deepcopy(self.inputs)
+        for i in range(self.size):
+            row = []
+            for j in range(self.size):
+                row.insert(0,temp.pop(0))
+            rows.insert(0,row)
+        return rows
+
     #Returns a list of all the block coordinates
     def get_coords(self):
         """Returns a list of coordinates of block placement"""
 
         coords = []
 
-        rows = self.get_rows()
+        rows = self.get_rows_reverse()
 
         #Loops through all inputs, filters and transforms inputs into coordinates
         y = 0
         for row in rows:
-            x = self.size - 1
-            for elem in row:
+            for x,elem in enumerate(row):
                 if elem == 1:
-                    coords.append(Coordinate(x,y))
-                    x -= 1
+                    coords.append(Coordinate(4-x,y))
                 else:
-                    x -= 1
+                    pass
             y += 1
 
         return coords
