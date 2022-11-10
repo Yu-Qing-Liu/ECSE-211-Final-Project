@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 #Object imports
 from objects.grid import Grid
 from objects.motor_a import Motor_A
@@ -26,7 +27,7 @@ try:
     #            □ □ □ □ □
     #            □ □ □ □ □
     #            □ □ □ □ □
-    # motorA ->  □ □ □ □ □
+    #            □ □ □ □ □  <- motorA 
     #                ˆ
     #              motorB
     # 

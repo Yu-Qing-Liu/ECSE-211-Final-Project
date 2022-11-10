@@ -3,7 +3,6 @@ import math
 import copy
 from objects.coordinate import Coordinate
 
-# A grid object used to represent the grid. Contains methods related to the grid properties
 class Grid:
     #Constructor
     def __init__(self, inputs):

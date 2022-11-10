@@ -1,4 +1,4 @@
-# A coordinate object. Can be used to store the x and y values of a cube
+
 class Coordinate:
     #Constructor
     def __init__(self,x_coord,y_coord):
