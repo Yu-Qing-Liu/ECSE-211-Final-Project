@@ -16,10 +16,10 @@ class Motor_B:
         self.position = new_position
 
     #Rotate the motor given a command (command can be = to 0,1,2,3,4) and based on the robots initial y-position
-    def push(self,command):
+    def move(self,command):
         print("Moving to row", command,"from ypos",self.position)
         #@Todo : implement the correct movements given the command and based on the robots initial y-position
-        
+
         #Update the position of the robot based on command given
         self.set_position(command)
         

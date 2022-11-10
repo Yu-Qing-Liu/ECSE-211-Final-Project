@@ -53,7 +53,7 @@ try:
             motor_a.push(command.get_x())
         else:
             #if we are not on the same row, use motor b to move to the next row
-            motor_b.push(command.get_y())
+            motor_b.move(command.get_y())
             #Have the cube tower dispense 1x cube
             cube_tower.dispense()
             #start creating the next row
