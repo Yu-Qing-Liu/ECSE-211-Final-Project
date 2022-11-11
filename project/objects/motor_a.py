@@ -27,7 +27,7 @@ class Motor_A:
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def push(self,command):
-        print("Pushing the cube horizontally to position: ", command)
+        print("Pushing the cube horizontally to position", command)
         try:
             distanceToTravel = (5-command) * self.distancePerCell
             numberOfRotations = distanceToTravel/self.wheel_circumference

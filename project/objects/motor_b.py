@@ -35,9 +35,9 @@ class Motor_B:
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def move(self,command):
-        print("Moving the robot vertically to row: ", command)
+        print("Moving the robot vertically to row", command,"from row",self.position)
         try:
-            distanceToTravel = ((command - self.position) - 5) * self.distancePerCell
+            distanceToTravel = (5- (command - self.position)) * self.distancePerCell
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360
             sleep_time = rotation/self.speed
