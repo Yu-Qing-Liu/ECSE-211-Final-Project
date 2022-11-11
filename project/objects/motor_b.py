@@ -28,19 +28,16 @@ class Motor_B:
         self.motor.reset_encoder()                        # Reset encoder to 0 value
         self.motor.set_limits(POWER_LIMIT, SPEED_LIMIT) # Set the power and speed limits
         self.motor.set_power(0)
-  
+
     #Update the robot's position
     def set_position(self,new_position):
         self.position = new_position
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def move(self,command):
-        print("Moving the robot vertically to row: ", command)
-        #@Todo : implement the correct movements given the command
-        
-        #Dummy code for testing
+        print("Moving the robot vertically to row", command,"from row",self.position)
         try:
-            distanceToTravel = (command - 5) * self.distancePerCell
+            distanceToTravel = (5- (command - self.position)) * self.distancePerCell
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360
             sleep_time = rotation/self.speed
