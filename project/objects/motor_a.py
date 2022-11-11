@@ -54,5 +54,3 @@ class Motor_A:
 
         except IOError as error:
             print(error)
-
-        
