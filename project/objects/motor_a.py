@@ -12,8 +12,6 @@ class Motor_A:
     wheel_circumference = 2*math.pi*wheel_radius
     distancePerCell = 4
 
-  
-
     #Constructor
     def __init__(self):
 
@@ -26,12 +24,10 @@ class Motor_A:
         self.motor.reset_encoder()                        # Reset encoder to 0 value
         self.motor.set_limits(POWER_LIMIT, SPEED_LIMIT) # Set the power and speed limits
         self.motor.set_power(0)
-  
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def push(self,command):
         print("Pushing the cube horizontally to position: ", command)
-        #Dummy code for testing
         try:
             distanceToTravel = (5-command) * self.distancePerCell
             numberOfRotations = distanceToTravel/self.wheel_circumference
