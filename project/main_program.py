@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 #Object imports
 from objects.grid import Grid
 from objects.motor_a import Motor_A
@@ -31,7 +32,7 @@ try:
     #    ^       □ □ □ □ □
     # motorB     □ □ □ □ □
     # motorA ->  □ □ □ □ □
-    #    
+    # 
 
     #Get the list or coordinates in placement order from grid object's method
     commands = grid.get_coords()
