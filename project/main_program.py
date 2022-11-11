@@ -4,9 +4,11 @@ from objects.grid import Grid
 from objects.motor_a import Motor_A
 from objects.motor_b import Motor_B
 from objects.tower import Tower
+from objects.admin import Admin
 #Brick imports
 from utils.brick import reset_brick, wait_ready_sensors
-
+#Other imports
+import time
 
 wait_ready_sensors(True)
 
@@ -18,9 +20,13 @@ try:
     #Initiate tower
     cube_tower = Tower()
 
-    #Initiate a test Grid
-    #grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1])
-    grid = Grid([0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0])
+    #Initialize admin GUI
+    admin = Admin()
+
+    #Using grid input from admin
+    admin.start()
+    time.sleep(1)
+    grid = Grid(admin.get_inputs())
 
     #Print out the grid
     grid.__repr__()
