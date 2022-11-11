@@ -8,25 +8,18 @@ class Motor_B:
     def __init__(self):
         #Assign port of motor
         self.motor = Motor("B")
+        #Assign default position of the robot
+        self.position = 0
     
-    #Rotate the motor given a command (command can be = to 0,1,2,3,4)
-    def push(self,command):
-        print("Pushing the cubes vertically to position", command)
-        #@Todo : implement the correct movements given the command
+    #Update the robot's position
+    def set_position(self,new_position):
+        self.position = new_position
+
+    #Rotate the motor given a command (command can be = to 0,1,2,3,4) and based on the robots initial y-position
+    def move(self,command):
+        print("Moving to row", command,"from ypos",self.position)
+        #@Todo : implement the correct movements given the command and based on the robots initial y-position
+
+        #Update the position of the robot based on command given
+        self.set_position(command)
         
-        #Dummy code for testing
-        try:
-            time.sleep(1)
-            # Rotate to push the cubes forward
-            self.motor.reset_encoder()
-            self.motor.set_dps(200)
-            self.motor.set_position_relative(50)
-            # Rotate back to original position
-            time.sleep(1)
-            self.motor.reset_encoder()
-            self.motor.set_dps(200)
-            self.motor.set_position_relative(-50)
-            # Wait for operations to complete
-            time.sleep(1.5)
-        except IOError as error:
-            print(error)

@@ -18,41 +18,44 @@ try:
     cube_tower = Tower()
 
     #Initiate a test Grid
-    grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1])
+    #grid = Grid([1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1])
+    grid = Grid([0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0])
+
+    #Print out the grid
+    grid.__repr__()
 
     #Get the commands using row mode (motor_a is place at bottom left)
     #
     #            □ □ □ □ □
     #            □ □ □ □ □
-    #            □ □ □ □ □
-    #            □ □ □ □ □
+    #    ^       □ □ □ □ □
+    # motorB     □ □ □ □ □
     # motorA ->  □ □ □ □ □
-    #                ˆ
-    #              motorB
-    # 
+    #    
 
     #Get the list or coordinates in placement order from grid object's method
-    commands = grid.get_coords("row")
+    commands = grid.get_coords()
 
     #temp value for y
-    y_init = commands[0].get_y()
+    y_init = 0
 
     #pops the coordinates from commands list and evaluates them one by one
     while commands:
         #Store the poped coordinate into a variable called command
         command = commands.pop(0)
-
-        #Have the cube tower dispense 1x cube
-        cube_tower.dispense()
         
         #Check if we are on the same row
         if command.get_y() == y_init:
-            #create the row
+            #Have the cube tower dispense 1x cube
+            cube_tower.dispense()
+            #create the first row
             #use motor_a object's push method to move the cube to the right position
             motor_a.push(command.get_x())
         else:
-            #if we are not on the same row, use motor b to push all the blocks onto the correct row
-            motor_b.push(y_init)
+            #if we are not on the same row, use motor b to move to the next row
+            motor_b.move(command.get_y())
+            #Have the cube tower dispense 1x cube
+            cube_tower.dispense()
             #start creating the next row
             motor_a.push(command.get_x())
             #we must update the temp value of y to the next row before continuing
