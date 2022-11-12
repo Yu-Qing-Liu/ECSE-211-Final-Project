@@ -48,3 +48,7 @@ class Admin:
         Button(root, text='Start', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=350)
 
         root.mainloop()
+    
+    #Reset the inputs
+    def reset(self):
+        self.inputs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
