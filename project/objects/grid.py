@@ -64,6 +64,16 @@ class Grid:
 
         return coords
 
+    #Returns true if the grid is valid, false otherwise
+    def is_valid(self):
+        cubes = 0
+        for input in self.inputs:
+            if input == 1:
+                cubes += 1
+
+        return cubes <= 15
+
+
     #Prints out the grid
     def __repr__(self):
         rows = self.get_rows()
