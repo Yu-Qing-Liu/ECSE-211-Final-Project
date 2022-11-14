@@ -23,11 +23,26 @@ try:
 
     #Initialize admin GUI
     admin = Admin()
-
-    #Using grid input from admin
-    admin.start()
-    time.sleep(1)
-    grid = Grid(admin.get_inputs())
+    user = User()
+    
+    #Ask user if he wants to use admin or user mode
+    while True:
+        selection = input("Enter <admin> for admin mode, and <user> for user mode\n")
+        if(selection == "admin"):
+            admin.start()
+            grid = Grid(admin.get_inputs())
+            if(grid.is_valid()):
+                break
+            else:
+                print("Sorry, you have exceeded the amount of cubes available")
+                admin.reset()
+        else:
+            user.start()
+            grid = Grid(user.get_inputs())
+            if(grid.is_valid()):
+                break
+            else:
+                print("Sorry, you have exceeded the amount of cubes available")
 
     #Print out the grid
     grid.__repr__()
