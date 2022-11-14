@@ -70,8 +70,16 @@ class Grid:
         for input in self.inputs:
             if input == 1:
                 cubes += 1
+        #error codes: 0 for success, 1 for too many cubes, 2 for no cubes and 3 for unexpected error
+        if cubes <= 15 and cubes >=1:
+            return 0                
+        elif cubes > 15:
+            return 1
+        elif cubes < 1:
+            return 2
+        else:
+            return 3
 
-        return cubes <= 15
 
 
     #Prints out the grid

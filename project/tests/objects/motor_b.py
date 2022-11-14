@@ -3,7 +3,7 @@ from utils.brick import Motor
 import time
 import math
 
-#The object Motor_A represents the motor used in horizontal pushing.
+#The object Motor_B represents the motor used in vertical pushing.
 #Contains push method that rotates the motor based on commands
 class Motor_B:
 
@@ -25,7 +25,7 @@ class Motor_B:
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def push(self,command):
-        print("Pushing the cube horizontally to position: ", command)
+        print("Pushing the cube vertically to position: ", command)
         #Dummy code for testing
         try:
 
@@ -53,3 +53,5 @@ class Motor_B:
             self.motor.set_power(0)
         except IOError as error:
             print(error)
+
+

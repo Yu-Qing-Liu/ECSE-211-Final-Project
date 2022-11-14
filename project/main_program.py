@@ -24,27 +24,10 @@ try:
     #Initialize admin GUI
     admin = Admin()
 
-    #Initialize user Mode
-    user = User()
-
-    #Ask user if he wants to use admin or user mode
-    while True:
-        selection = input("Enter <admin> for admin mode, and <user> for user mode\n")
-        if(selection == "admin"):
-            admin.start()
-            grid = Grid(admin.get_inputs())
-            if(grid.is_valid()):
-                break
-            else:
-                print("Sorry, you have exceeded the amount of cubes available")
-                admin.reset()
-        else:
-            user.start()
-            grid = Grid(user.get_inputs())
-            if(grid.is_valid()):
-                break
-            else:
-                print("Sorry, you have exceeded the amount of cubes available")
+    #Using grid input from admin
+    admin.start()
+    time.sleep(1)
+    grid = Grid(admin.get_inputs())
 
     #Print out the grid
     grid.__repr__()
@@ -78,7 +61,7 @@ try:
             motor_a.push(command.get_x())
         else:
             #if we are not on the same row, use motor b to move to the next row
-            motor_b.move(command.get_y())
+            motor_b.push(command.get_y())
             #Have the cube tower dispense 1x cube
             cube_tower.dispense()
             #start creating the next row

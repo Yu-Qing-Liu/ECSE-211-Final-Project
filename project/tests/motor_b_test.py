@@ -12,6 +12,7 @@ wait_ready_sensors(True)
 try:
     #Initiate motors
     motor_b = motor_b.Motor_B()
+    #command to push to row 1
     motor_b.push(1)
 except KeyboardInterrupt:
     reset_brick()
