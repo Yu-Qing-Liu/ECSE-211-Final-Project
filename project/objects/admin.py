@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
-from objects.grid_elem import Gridelem
+from utils.grid_elem import Gridelem
 
 class Admin:
     #Constructor
@@ -29,15 +29,15 @@ class Admin:
 
         # This is the section of code which creates the button grid
         
-        y_init = 50
+        y_pos = 50
         button_id = 0
         for i in range(5):
             for j in range(5):
                 grid_button = Gridelem(button_id,root,self.get_inputs())
                 self.inputs = grid_button.get_inputs()
-                grid_button.button.place(x=50+50*j,y=y_init)
+                grid_button.button.place(x=50+50*j,y=y_pos)
                 button_id += 1
-            y_init += 50
+            y_pos += 50
 
         #Start button onClick function
 
@@ -45,7 +45,7 @@ class Admin:
             root.destroy()
             return None
 
-        Button(root, text='Start', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=350)
+        Button(root, text='Start Drawing', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=350)
 
         root.mainloop()
     
