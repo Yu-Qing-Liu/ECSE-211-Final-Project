@@ -31,15 +31,15 @@ try:
         if(selection == "admin"):
             admin.start()
             grid = Grid(admin.get_inputs())
-            if(grid.is_valid()):
+            if grid.is_valid() == 0:
                 break
-            elif grid.isValid() == 1:
+            elif grid.is_valid() == 1:
                 print("Sorry, you have exceeded the amount of cubes available, please try again")
                 admin.reset()
-            elif grid.isValid() == 2:
+            elif grid.is_valid() == 2:
                 print("Sorry, you need to use at least 1 cube, please try again")
                 admin.reset()
-            elif grid.isValid() == 3:
+            elif grid.is_valid() == 3:
                 print("Sorry, an unexpected error has occured, please try again")
                 admin.reset()
         else:
