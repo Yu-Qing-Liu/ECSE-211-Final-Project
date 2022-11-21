@@ -15,13 +15,13 @@ class Motor_A:
 
     POWER_LIMIT = 100       # Power limit = 100%
     SPEED_LIMIT = 720      # Speed limit = 720 deg per sec (dps)
-  
+
 
     #Constructor
     def __init__(self):
         #Assign port of motor
         self.motor = Motor("A")
- 
+
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def push(self,command):
