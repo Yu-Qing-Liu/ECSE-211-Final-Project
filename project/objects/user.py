@@ -22,7 +22,7 @@ class User:
         root = Tk()
 
         # This is the section of code which creates the main window
-        root.geometry('1920x1080')
+        root.geometry('850x850')
         root.configure(background='#F0F8FF')
         root.title('GUI')
 
@@ -46,7 +46,7 @@ class User:
             root.destroy()
             return None
 
-        Button(root, text='Start Drawing', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=850)
+        Button(root, text='Start Drawing', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=775)
 
         root.mainloop()
     
