@@ -17,7 +17,7 @@ class Gridelem():
                 self.button.configure(bg="#000000")
             self.state = not self.state
             self.update_inputs()
-        self.button = Button(root, text='     ', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click)
+        self.button = Button(root, text="", bg="#FFFFFF", command=on_click)
     
     #Update inputs
     def update_inputs(self):
