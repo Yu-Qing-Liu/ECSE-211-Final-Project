@@ -22,7 +22,7 @@ class User:
         root = Tk()
 
         # This is the section of code which creates the main window
-        root.geometry('850x850')
+        root.geometry('450x490')
         root.configure(background='#F0F8FF')
         root.title('GUI')
 
@@ -35,10 +35,10 @@ class User:
             for j in range(5):
                 grid_button = Gridelem(button_id,root,self.get_inputs())
                 self.inputs = grid_button.get_inputs()
-                grid_button.button.configure(width=12, height=5)
-                grid_button.button.place(x=50+150*j,y=y_pos)
+                grid_button.button.configure(width=4, height=3)
+                grid_button.button.place(x=50+70*j,y=y_pos)
                 button_id += 1
-            y_pos += 142
+            y_pos += 70
 
         #Start button onClick function
 
@@ -46,7 +46,7 @@ class User:
             root.destroy()
             return None
 
-        Button(root, text='Start Drawing', bg="#FFFFFF", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=775)
+        Button(root, width=35, height=2, text='Start Drawing', bg="#00FF00", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
 
         root.mainloop()
     
