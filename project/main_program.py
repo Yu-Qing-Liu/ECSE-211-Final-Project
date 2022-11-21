@@ -63,7 +63,7 @@ try:
     # 
 
     #Get the list or coordinates in placement order from grid object's method
-    commands = grid.get_coords_1()
+    commands = grid.get_coords_2()
 
     #Algorithm for IDEA #1
     #temp value for y
