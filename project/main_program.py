@@ -33,8 +33,14 @@ try:
             grid = Grid(admin.get_inputs())
             if(grid.is_valid()):
                 break
-            else:
-                print("Sorry, you have exceeded the amount of cubes available")
+            elif grid.isValid() == 1:
+                print("Sorry, you have exceeded the amount of cubes available, please try again")
+                admin.reset()
+            elif grid.isValid() == 2:
+                print("Sorry, you need to use at least 1 cube, please try again")
+                admin.reset()
+            elif grid.isValid() == 3:
+                print("Sorry, an unexpected error has occured, please try again")
                 admin.reset()
         else:
             user.start()
