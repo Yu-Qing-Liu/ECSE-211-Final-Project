@@ -30,7 +30,3 @@ class Gridelem():
     #Retrieve inputs
     def get_inputs(self):
         return self.inputs
-
-    #Modify inputs
-    def set_grid(self,new_inputs):
-        self.inputs = new_inputs
