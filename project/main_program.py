@@ -22,33 +22,23 @@ try:
     cube_tower = Tower()
 
     #Initialize user GUI and admin console
-    admin = Admin()
-    user = User()
+    
     
     #Ask user if he wants to use admin or user mode
     while True:
         selection = input("Enter <admin> for admin mode, and <user> for user mode\n")
         if(selection == "user"):
+            user = User()
             user.start()
             grid = Grid(user.get_inputs())
-            if grid.is_valid() == 0:
-                break
-            elif grid.is_valid() == 1:
-                print("Sorry, you have exceeded the amount of cubes available, please try again")
-                user.reset()
-            elif grid.is_valid() == 2:
-                print("Sorry, you need to use at least 1 cube, please try again")
-                user.reset()
-            elif grid.is_valid() == 3:
-                print("Sorry, an unexpected error has occured, please try again")
-                user.reset()
+            break
+        elif(selection == "admin"):
+            admin = Admin()
+            admin.start()
+            grid = Grid(admin.get_inputs())
+            break
         else:
-            user.start()
-            grid = Grid(user.get_inputs())
-            if(grid.is_valid()):
-                break
-            else:
-                print("Sorry, you have exceeded the amount of cubes available")
+            print("Please enter a valid selection")
 
     #Print out the grid
     grid.__repr__()
