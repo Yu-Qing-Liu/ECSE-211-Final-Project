@@ -15,22 +15,26 @@ class Motor_B:
 
     POWER_LIMIT = 100       # Power limit = 100%
     SPEED_LIMIT = 720      # Speed limit = 720 deg per sec (dps)
-  
+
 
     #Constructor
     def __init__(self):
         #Assign port of motor
         self.motor = Motor("B")
- 
+        #Robot's position
+        self.position = 0
+
+    #Update the robot's position
+    def update(self,new_pos):
+        self.position = new_pos
     
     #Rotate the motor given a command (command can be = to 0,1,2,3,4)
     def push(self,command):
-        print("Pushing the cube vertically to position: ", command)
+        print("Moving the robot to position", command,"from",self.position)
         #Dummy code for testing
         try:
 
-            
-            distanceToTravel = (5-command) * self.distancePerCell
+            distanceToTravel = (5-(command-self.position)) * self.distancePerCell
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360
             sleep_time = rotation/self.speed
@@ -45,12 +49,10 @@ class Motor_B:
             self.motor.set_dps(self.speed)                              # Set the speed for the motor
             self.motor.set_position_relative(rotation)             # Rotate the desired amount of degrees
             time.sleep(sleep_time)
-            #motor moving backward
-            self.motor.set_dps(self.speed)                              # Set the speed for the motor
-            self.motor.set_position_relative(-rotation)             # Rotate the desired amount of degrees
-            time.sleep(sleep_time)
 
             self.motor.set_power(0)
+
+            self.update(command)
         except IOError as error:
             print(error)
 
