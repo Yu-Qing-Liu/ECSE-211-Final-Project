@@ -3,7 +3,7 @@ from utils.brick import Motor
 import time
 import math
 
-#The object Motor_B represents the motor used in vertical pushing.
+#The object Motor_A represents the motor used in horizontal pushing.
 #Contains push method that rotates the motor based on commands
 class Motor_B:
 
@@ -15,43 +15,41 @@ class Motor_B:
 
     POWER_LIMIT = 100       # Power limit = 100%
     SPEED_LIMIT = 720      # Speed limit = 720 deg per sec (dps)
-  
 
     #Constructor
     def __init__(self):
         #Assign port of motor
-        self.motor = Motor("B")
- 
-    
-    #Rotate the motor given a command (command can be = to 0,1,2,3,4)
-    def push(self,command):
-        print("Pushing the cube vertically to position: ", command)
-        #Dummy code for testing
-        try:
+        self.motorB = Motor("B")
+        self.motorD = Motor("D")
+        #Initial position
+        self.position = 0
 
+    #Update the initial position of the robot
+    def update(self, new_position):
+        self.position = new_position
             
-            distanceToTravel = (5-command) * self.distancePerCell
-            numberOfRotations = distanceToTravel/self.wheel_circumference
-            rotation = numberOfRotations * 360
-            sleep_time = rotation/self.speed
+    def move(self,command):
+        print("Moving the robot to position:", command,"From position",self.position)
+        distanceToTravel = 4.7*(command - self.position)
+        numberOfRotations = distanceToTravel/self.wheel_circumference
+        rotation = numberOfRotations * 360
+        sleep_time = rotation/self.speed
+        
+        time.sleep(0.2)
+        self.motorD.reset_encoder()                        # Reset encoder to 0 value
+        self.motorD.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorD.set_power(0)
+        self.motorB.reset_encoder()                        # Reset encoder to 0 value
+        self.motorB.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorB.set_power(0)
+        time.sleep(0.2)
 
-            time.sleep(1)
-            self.motor.reset_encoder()                        # Reset encoder to 0 value
-            self.motor.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
-            self.motor.set_power(0)
-            time.sleep(1)
+        #motor moving
+        self.motorB.set_dps(self.speed)                              # Set the speed for the motor
+        self.motorB.set_position_relative(-rotation)             # Rotate the desired amount of degrees
+        self.motorD.set_dps(self.speed*1.075)                              # Set the speed for the motor (multiplier to account for drift)
+        self.motorD.set_position_relative(rotation)             # Rotate the desired amount of degrees
+        time.sleep(sleep_time)
 
-            #motor moving forward
-            self.motor.set_dps(self.speed)                              # Set the speed for the motor
-            self.motor.set_position_relative(rotation)             # Rotate the desired amount of degrees
-            time.sleep(sleep_time)
-            #motor moving backward
-            self.motor.set_dps(self.speed)                              # Set the speed for the motor
-            self.motor.set_position_relative(-rotation)             # Rotate the desired amount of degrees
-            time.sleep(sleep_time)
-
-            self.motor.set_power(0)
-        except IOError as error:
-            print(error)
-
+        self.update(command)
 
