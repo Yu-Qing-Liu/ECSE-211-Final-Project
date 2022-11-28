@@ -19,7 +19,3 @@ class Cube_Counter:
         else: 
             self.label.configure(text=new_text,fg="#FF0000")
         return None
-
-    #Retrieve inputs
-    def get_num_cubes(self):
-        return self.cubes
