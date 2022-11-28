@@ -2,18 +2,46 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
 from utils.grid_element import Grid_Element
-from utils.brick import EV3UltrasonicSensor
+from utils.brick import EV3UltrasonicSensor,wait_ready_sensors,reset_brick
 from objects.grid import Grid
 from utils.error_message import Error_Message
 from utils.cube_counter import Cube_Counter
+from threading import Thread
+from time import sleep
+
+#Global variables
+close = False
+status = False
+
+#US_sensor thread
+def run(status_message):
+    us = EV3UltrasonicSensor(2)
+    wait_ready_sensors(True)
+    global close
+    global status
+    
+    try:
+        while not close:
+            if us.get_cm() < 5.0:
+                sleep(2)
+                if us.get_cm() < 5.0:
+                    status_message.update_message("Status: Ready")
+                    status_message.message.configure(fg="green")
+                    status = True
+            else:
+                status_message.update_message("Status: Not Ready")
+                status_message.message.configure(fg="red")
+                status = False
+            sleep(1)
+        reset_brick()
+    except BaseException as error:
+        print(error) # For debugging
 
 class User:
     #Constructor
     def __init__(self):
         self.inputs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.root = Tk()
-        self.us = EV3UltrasonicSensor(2)
-        self.us_data = self.us.get_cm()
         self.cube_counter = Cube_Counter(self.root)
         self.error_message = Error_Message(self.root)
         self.status_message = Error_Message(self.root)
@@ -28,6 +56,12 @@ class User:
 
     #Initialize the gui
     def start(self):
+        global status
+        global close
+
+        #Start us thread
+        us_thread = Thread(target=run,args=(self.status_message,))
+        us_thread.start()
 
         # This is the section of code which creates the main window
         self.root.geometry('575x490+350+0')
@@ -39,12 +73,6 @@ class User:
 
         # This is the section of code which creates the status message
         self.status_message.message.place(x=425,y=100)
-        if True:#self.us_data < 5:
-            self.status_message.update_message("Status: Ready")
-            self.status_message.message.configure(fg="green")
-        else:
-            self.status_message.update_message("Status: Not Ready")
-            self.status_message.message.configure(fg="red")
 
         # This is the section of code which creates the button grid
         y_pos = 50
@@ -60,11 +88,14 @@ class User:
 
         #Start button on_click function
         def on_click():
+            global close
+            global status
             grid = Grid(self.inputs)
             self.error_message.message.place(x=50,y=450)
-            if True:#self.us_data < 5:
+            if status:
                 if grid.is_valid() == 0:
-                    self.error_message.hide_message()
+                    close = True
+                    us_thread.join()
                     self.root.quit()
                 elif grid.is_valid() == 1:
                     m = "Sorry, you have exceeded the amount of cubes available, please try again"
@@ -78,11 +109,13 @@ class User:
             else:
                 m = "Sorry, there arent enough cubes loaded onto the machine"
                 self.error_message.update_message(m)
+                
 
         Button(self.root, width=35, height=2, text='Start Drawing', bg="green", fg="white", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
 
         #If the user closes the GUI, Exit the program
         def on_closing():
+            reset_brick()
             exit(0)
         self.root.protocol("WM_DELETE_WINDOW", on_closing)
 

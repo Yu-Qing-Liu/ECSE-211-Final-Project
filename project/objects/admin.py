@@ -8,14 +8,18 @@ class Admin:
     def __init__(self):
         self.inputs = []
         self.us = EV3UltrasonicSensor(2)
-        self.us_data = self.us.get_cm()
 
     #Starts the query process using touch sensors
     def start(self):
 
-        while self.us_data > 5:
-            print("Sorry, there arent enough cubes loaded onto the machine")
-            sleep(5)
+        wait_ready_sensors(True)
+
+        while True:
+            if self.us.get_cm() < 5.0:
+                sleep(2)
+                if self.us.get_cm() < 5.0:
+                    print("All cubes loaded")
+                    break
 
         for i in range(5):
             row_count = i+1
