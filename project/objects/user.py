@@ -16,6 +16,7 @@ class User:
         self.us_data = self.us.get_cm()
         self.cube_counter = Cube_Counter(self.root)
         self.error_message = Error_Message(self.root)
+        self.status_message = Error_Message(self.root)
 
     #Modify inputs
     def set_inputs(self,new_inputs):
@@ -36,6 +37,15 @@ class User:
         # This is the section of code which creates the cube counter
         self.cube_counter.label.place(x=400,y=50)
 
+        # This is the section of code which creates the status message
+        self.status_message.message.place(x=400,y=100)
+        if self.us_data < 5:
+            self.status_message.update_message("Status: Ready")
+            self.status_message.message.configure(fg="green")
+        else:
+            self.status_message.update_message("Status: Not Ready")
+            self.status_message.message.configure(fg="red")
+
         # This is the section of code which creates the button grid
         y_pos = 50
         button_id = 0
@@ -52,7 +62,7 @@ class User:
         def on_click():
             grid = Grid(self.inputs)
             self.error_message.message.place(x=50,y=450)
-            if(True):#self.us_data < 5):
+            if self.us_data < 5:
                 if grid.is_valid() == 0:
                     self.error_message.hide_message()
                     self.root.quit()
@@ -65,6 +75,9 @@ class User:
                 elif grid.is_valid() == 3:
                     m = "Sorry, An unexpected error has occured, please try again"
                     self.error_message.update_message(m)
+            else:
+                m = "Sorry, there arent enough cubes loaded onto the machine"
+                self.error_message.update_message(m)
 
         Button(self.root, width=35, height=2, text='Start Drawing', bg="#00FF00", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
 
