@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
 
-class Gridelem():
+class Grid_Element():
 
     #Constructor
     def __init__(self,id,root,inputs):
