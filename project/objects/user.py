@@ -74,10 +74,6 @@ class User:
         self.root.protocol("WM_DELETE_WINDOW", on_closing)
 
         self.root.mainloop()
-    
-    #Reset the inputs
-    def reset(self):
-        self.inputs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
     #Exit GUI
     def exit(self):
