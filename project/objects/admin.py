@@ -10,29 +10,16 @@ class Admin:
     #Starts the query process using touch sensors
     def start(self):
 
-        TOUCH_SENSOR_0 = TouchSensor(1)
-        TOUCH_SENSOR_1 = TouchSensor(2)
-        wait_ready_sensors(True)
+        for i in range(5):
+            row_count = i+1
+            print("Enter the numbers for row #",end=" ")
+            print(row_count,end=" ")
+            print("in the following format: <0 0 0 0 0>, Press CTRL+C to abort")
+            row = input()
+            row_arr = row.split()
+            for elem in row_arr:
+                self.inputs.append(int(elem))
 
-        arr=[]
-        arr = [0 for i in range(25)]
-        index = 0
-
-        while True:
-            time.sleep(0.2)
-            if TOUCH_SENSOR_1.is_pressed():
-                print("1")
-                arr[index] = 1
-                index += 1
-                time.sleep(0.1)
-            if TOUCH_SENSOR_0.is_pressed():
-                print("0")
-                index += 1
-                time.sleep(0.1)
-            if index == 25:
-                break
-
-        self.inputs = arr
-
+    #Retreive the inputs
     def get_inputs(self):
         return self.inputs

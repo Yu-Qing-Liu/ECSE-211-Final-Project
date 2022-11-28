@@ -5,6 +5,7 @@ from utils.grid_element import Grid_Element
 from utils.brick import EV3UltrasonicSensor
 from objects.grid import Grid
 from utils.error_message import Error_Message
+from utils.cube_counter import Cube_Counter
 
 class User:
     #Constructor
@@ -13,6 +14,8 @@ class User:
         self.root = Tk()
         self.us = EV3UltrasonicSensor(2)
         self.us_data = self.us.get_cm()
+        self.cube_counter = Cube_Counter(self.root)
+        self.error_message = Error_Message(self.root)
 
     #Modify inputs
     def set_inputs(self,new_inputs):
@@ -30,38 +33,38 @@ class User:
         self.root.configure(background='#F0F8FF')
         self.root.title('GUI')
 
+        # This is the section of code which creates the cube counter
+        self.cube_counter.label.place(x=400,y=50)
 
         # This is the section of code which creates the button grid
-        
         y_pos = 50
         button_id = 0
         for i in range(5):
             for j in range(5):
-                grid_button = Grid_Element(button_id,self.root,self.get_inputs())
+                grid_button = Grid_Element(button_id,self.root,self.get_inputs(),self.error_message,self.cube_counter)
                 self.inputs = grid_button.get_inputs()
-                grid_button.button.configure(width=4, height=3)
+                grid_button.button.configure(width=4, height=3, bg="#FFFFFF")
                 grid_button.button.place(x=50+70*j,y=y_pos)
                 button_id += 1
             y_pos += 70
 
-        #Start button onClick function
+        #Start button on_click function
         def on_click():
             grid = Grid(self.inputs)
-            error_message = Error_Message(self.root)
-            error_message.message.place(x=50,y=450)
+            self.error_message.message.place(x=50,y=450)
             if(True):#self.us_data < 5):
                 if grid.is_valid() == 0:
-                    error_message.hide_message()
+                    self.error_message.hide_message()
                     self.root.quit()
                 elif grid.is_valid() == 1:
                     m = "Sorry, you have exceeded the amount of cubes available, please try again"
-                    error_message.update_inputs(m)
+                    self.error_message.update_message(m)
                 elif grid.is_valid() == 2:
                     m = "Sorry, you have to place at least 1 cube, please try again"
-                    error_message.update_inputs(m)
+                    self.error_message.update_message(m)
                 elif grid.is_valid() == 3:
                     m = "Sorry, An unexpected error has occured, please try again"
-                    error_message.update_inputs(m)
+                    self.error_message.update_message(m)
 
         Button(self.root, width=35, height=2, text='Start Drawing', bg="#00FF00", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
 
@@ -75,3 +78,7 @@ class User:
     #Reset the inputs
     def reset(self):
         self.inputs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    #Exit GUI
+    def exit(self):
+        self.root.destroy()
