@@ -13,7 +13,7 @@ class Motor_A:
     speed = 250 #speedin dps
     distancePerCell = 4
 
-    POWER_LIMIT = 100       # Power limit = 100%
+    POWER_LIMIT = 200       # Power limit = 100%
     SPEED_LIMIT = 720      # Speed limit = 720 deg per sec (dps)
 
     #Constructor
@@ -28,6 +28,7 @@ class Motor_A:
         try:
 
             
+
             distanceToTravel = (4-command)*self.distancePerCell + 7.1
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360

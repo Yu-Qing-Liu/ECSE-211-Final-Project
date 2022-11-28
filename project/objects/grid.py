@@ -40,34 +40,12 @@ class Grid:
         for i in range(self.size):
             row = []
             for j in range(self.size):
-                row.insert(0,temp.pop(0))
+                row.append(temp.pop(0))
             rows.insert(0,row)
         return rows
 
-    #Returns a list of all the block coordinates (Idea #1)
-    def get_coords_1(self):
-        """Returns a list of coordinates of block placement"""
-
-        coords = []
-
-        rows = self.get_rows()
-
-        #Loops through all inputs, filters and transforms inputs into coordinates
-        y = self.size - 1
-        for row in rows:
-            x = self.size - 1
-            for elem in reversed(row):
-                if elem == 1:
-                    coords.append(Coordinate(x,y))
-                    x -= 1
-                else:
-                    x -= 1
-            y -= 1
-
-        return coords
-
     #Returns a list of all the block coordinates (Idea #2)
-    def get_coords_2(self):
+    def get_coords(self):
         """Returns a list of coordinates of block placement"""
 
         coords = []
@@ -79,7 +57,7 @@ class Grid:
         for row in rows:
             for x,elem in enumerate(row):
                 if elem == 1:
-                    coords.append(Coordinate(4-x,y))
+                    coords.append(Coordinate(x,y))
                 else:
                     pass
             y += 1

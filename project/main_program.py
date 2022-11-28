@@ -55,41 +55,15 @@ try:
 
     #Get the commands using row mode (motor_a is place at bottom left)
     #
-    #            □ □ □ □ □
-    #            □ □ □ □ □
-    #    ^       □ □ □ □ □
-    # motorB     □ □ □ □ □
-    # motorA ->  □ □ □ □ □
+    #   □ □ □ □ □
+    #   □ □ □ □ □
+    #   □ □ □ □ □      ^
+    #   □ □ □ □ □    motorB
+    #   □ □ □ □ □ <- motorA 
     # 
 
     #Get the list or coordinates in placement order from grid object's method
-    commands = grid.get_coords_2()
-
-    #Algorithm for IDEA #1
-    #temp value for y
-    #y_init = commands[0].get_y()
-
-    #pops the coordinates from commands list and evaluates them one by one
-    #while commands:
-        #Store the poped coordinate into a variable called command
-        #command = commands.pop(0)
-        #Have the cube tower dispense 1x cube
-        #cube_tower.dispense()
-        #Check if we are on the same row
-        #if command.get_y() == y_init:
-            #create the first row
-            #use motor_a object's push method to move the cube to the right position
-            #motor_a.push(command.get_x())
-            #Edge case (only 1 cube left)
-            #if(len(commands) == 0):
-                #motor_b.push(y_init)
-        #else:
-            #if we are not on the same row, use motor b to move to the next row
-            #motor_b.push(y_init)
-            #start creating the next row
-            #motor_a.push(command.get_x())
-            #we must update the temp value of y to the next row before continuing
-            #y_init = command.get_y()
+    commands = grid.get_coords()
 
     #Algorithm for IDEA #2
     #temp value for y
@@ -109,7 +83,7 @@ try:
             motor_a.push(command.get_x())
         else:
             #if we are not on the same row, use motor b to move to the next row
-            motor_b.push(command.get_y())
+            motor_b.move(command.get_y())
             #Have the cube tower dispense 1x cube
             cube_tower.dispense()
             #start creating the next row

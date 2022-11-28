@@ -10,7 +10,7 @@ class Motor_B:
     #class variables
     wheel_radius = 2
     wheel_circumference = 2*math.pi*wheel_radius
-    speed = 100 # in dps
+    speed = 200 # in dps
     distancePerCell = 4
 
     POWER_LIMIT = 100       # Power limit = 100%
@@ -31,6 +31,7 @@ class Motor_B:
     def move(self,command):
         print("Moving the robot to position:", command,"From position",self.position)
         distanceToTravel = 4.7*(command - self.position)
+
         numberOfRotations = distanceToTravel/self.wheel_circumference
         rotation = numberOfRotations * 360
         sleep_time = rotation/self.speed
@@ -47,7 +48,9 @@ class Motor_B:
         #motor moving
         self.motorB.set_dps(self.speed)                              # Set the speed for the motor
         self.motorB.set_position_relative(-rotation)             # Rotate the desired amount of degrees
+
         self.motorD.set_dps(self.speed*1.075)                              # Set the speed for the motor (multiplier to account for drift)
+
         self.motorD.set_position_relative(rotation)             # Rotate the desired amount of degrees
         time.sleep(sleep_time)
 
