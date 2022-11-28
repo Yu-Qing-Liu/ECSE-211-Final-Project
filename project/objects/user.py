@@ -62,7 +62,7 @@ class User:
         def on_click():
             grid = Grid(self.inputs)
             self.error_message.message.place(x=50,y=450)
-            if(True):#self.us_data < 5:
+            if self.us_data < 5:
                 if grid.is_valid() == 0:
                     self.error_message.hide_message()
                     self.root.quit()
