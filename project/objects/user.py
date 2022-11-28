@@ -30,16 +30,16 @@ class User:
     def start(self):
 
         # This is the section of code which creates the main window
-        self.root.geometry('450x490')
+        self.root.geometry('575x490+350+0')
         self.root.configure(background='#F0F8FF')
         self.root.title('GUI')
 
         # This is the section of code which creates the cube counter
-        self.cube_counter.label.place(x=400,y=50)
+        self.cube_counter.label.place(x=425,y=50)
 
         # This is the section of code which creates the status message
-        self.status_message.message.place(x=400,y=100)
-        if self.us_data < 5:
+        self.status_message.message.place(x=425,y=100)
+        if True:#self.us_data < 5:
             self.status_message.update_message("Status: Ready")
             self.status_message.message.configure(fg="green")
         else:
@@ -62,7 +62,7 @@ class User:
         def on_click():
             grid = Grid(self.inputs)
             self.error_message.message.place(x=50,y=450)
-            if self.us_data < 5:
+            if True:#self.us_data < 5:
                 if grid.is_valid() == 0:
                     self.error_message.hide_message()
                     self.root.quit()
@@ -79,7 +79,7 @@ class User:
                 m = "Sorry, there arent enough cubes loaded onto the machine"
                 self.error_message.update_message(m)
 
-        Button(self.root, width=35, height=2, text='Start Drawing', bg="#00FF00", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
+        Button(self.root, width=35, height=2, text='Start Drawing', bg="green", fg="white", font=('arial', 12, 'normal'), command=on_click).place(x=50,y=400)
 
         #If the user closes the GUI, Exit the program
         def on_closing():
