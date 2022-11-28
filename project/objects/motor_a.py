@@ -8,9 +8,9 @@ import math
 class Motor_A:
 
     #class variables
-    wheel_radius = 2
+    wheel_radius = 2.01
     wheel_circumference = 2*math.pi*wheel_radius
-    speed = 350 #speedin dps
+    speed = 250 #speedin dps
     distancePerCell = 4
 
     POWER_LIMIT = 200       # Power limit = 100%
@@ -28,7 +28,8 @@ class Motor_A:
         try:
 
             
-            distanceToTravel = ((4-command) * self.distancePerCell) + 7.2
+
+            distanceToTravel = (4-command)*self.distancePerCell + 7.1
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360
             sleep_time = rotation/self.speed
