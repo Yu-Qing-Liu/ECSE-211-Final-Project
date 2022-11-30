@@ -14,8 +14,11 @@ try:
     #Initiate motors
     motor_a = motor_a.Motor_A()
     #command to push to pos 0
+    motor_a.push(4)
+    motor_a.push(3)
+    motor_a.push(2)
+    motor_a.push(1)
     motor_a.push(0)
-
 
 except KeyboardInterrupt:
     reset_brick()

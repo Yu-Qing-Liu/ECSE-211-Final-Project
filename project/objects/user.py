@@ -21,10 +21,10 @@ def run(status_message):
     global status
     
     try:
-        while not close:
+        while True:
             print(cs.get_color_name() != "Unknown")
             if cs.get_color_name() != "Unknown":
-                sleep(0.5)
+                sleep(1.5)
                 if cs.get_color_name() != "Unknown":
                     status_message.update_message("Status: Ready")
                     status_message.message.configure(fg="green")
@@ -96,7 +96,7 @@ class User:
             if status:
                 if grid.is_valid() == 0:
                     close = True
-                    us_thread.join()
+                    #us_thread.join()
                     self.root.quit()
                 elif grid.is_valid() == 1:
                     m = "Sorry, you have exceeded the amount of cubes available, please try again"
