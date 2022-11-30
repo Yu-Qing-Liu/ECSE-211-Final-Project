@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import * 
 from utils.grid_element import Grid_Element
-from utils.brick import EV3UltrasonicSensor,wait_ready_sensors,reset_brick
+from utils.brick import EV3UltrasonicSensor,EV3ColorSensor,wait_ready_sensors,reset_brick
 from objects.grid import Grid
 from utils.error_message import Error_Message
 from utils.cube_counter import Cube_Counter
@@ -15,16 +15,17 @@ status = False
 
 #US_sensor thread
 def run(status_message):
-    us = EV3UltrasonicSensor(2)
+    cs = EV3ColorSensor(1)
     wait_ready_sensors(True)
     global close
     global status
     
     try:
         while not close:
-            if us.get_cm() < 5.0:
-                sleep(2)
-                if us.get_cm() < 5.0:
+            print(cs.get_color_name() != "Unknown")
+            if cs.get_color_name() != "Unknown":
+                sleep(0.5)
+                if cs.get_color_name() != "Unknown":
                     status_message.update_message("Status: Ready")
                     status_message.message.configure(fg="green")
                     status = True

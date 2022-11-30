@@ -8,7 +8,7 @@ import math
 class Motor_B:
 
     #class variables
-    wheel_radius = 2
+    wheel_radius = 2.01
     wheel_circumference = 2*math.pi*wheel_radius
     speed = 200 # in dps
     distancePerCell = 4
@@ -30,7 +30,7 @@ class Motor_B:
             
     def move(self,command):
         print("Moving the robot to position:", command,"From position",self.position)
-        distanceToTravel = 4.7*(command - self.position)
+        distanceToTravel = 4.2*(command - self.position)
 
         numberOfRotations = distanceToTravel/self.wheel_circumference
         rotation = numberOfRotations * 360
@@ -55,4 +55,32 @@ class Motor_B:
         time.sleep(sleep_time)
 
         self.update(command)
+        
+    def moveBack(self):
+        print("Moving the robot back to its initial position")
+        distanceToTravel = 4.7*(self.position)
+        numberOfRotations = distanceToTravel/self.wheel_circumference
+        rotation = numberOfRotations * 360
+        sleep_time = rotation/self.speed
+
+        time.sleep(0.2)
+        self.motorD.reset_encoder()                        # Reset encoder to 0 value
+        self.motorD.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorD.set_power(0)
+        self.motorB.reset_encoder()                        # Reset encoder to 0 value
+        self.motorB.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorB.set_power(0)
+        time.sleep(0.2)
+
+        #motor moving
+        self.motorB.set_dps(self.speed)                              # Set the speed for the motor
+        self.motorB.set_position_relative(rotation)             # Rotate the desired amount of degrees
+
+        self.motorD.set_dps(self.speed)                              # Set the speed for the motor (multiplier to account for drift)
+        self.motorD.set_position_relative(-rotation)             # Rotate the desired amount of degrees
+        time.sleep(sleep_time)
+        
+        self.update(0)
+        
+
 
