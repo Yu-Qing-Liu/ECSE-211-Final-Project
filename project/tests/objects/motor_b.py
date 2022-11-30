@@ -30,7 +30,7 @@ class Motor_B:
             
     def move(self,command):
         print("Moving the robot to position:", command,"From position",self.position)
-        distanceToTravel = 4.7*(command - self.position)
+        distanceToTravel = 4.5*(command - self.position)
         numberOfRotations = distanceToTravel/self.wheel_circumference
         rotation = numberOfRotations * 360
         sleep_time = rotation/self.speed
@@ -47,9 +47,36 @@ class Motor_B:
         #motor moving
         self.motorB.set_dps(self.speed)                              # Set the speed for the motor
         self.motorB.set_position_relative(-rotation)             # Rotate the desired amount of degrees
-        self.motorD.set_dps(self.speed*1.075)                              # Set the speed for the motor (multiplier to account for drift)
+        self.motorD.set_dps(self.speed)                              # Set the speed for the motor (multiplier to account for drift)
         self.motorD.set_position_relative(rotation)             # Rotate the desired amount of degrees
         time.sleep(sleep_time)
 
         self.update(command)
+        
+                
+    def moveBack(self):
+        print("Moving the robot back to its initial position")
+        distanceToTravel = 4.5*(self.position)
+        numberOfRotations = distanceToTravel/self.wheel_circumference
+        rotation = numberOfRotations * 360
+        sleep_time = rotation/self.speed
+
+        time.sleep(0.2)
+        self.motorD.reset_encoder()                        # Reset encoder to 0 value
+        self.motorD.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorD.set_power(0)
+        self.motorB.reset_encoder()                        # Reset encoder to 0 value
+        self.motorB.set_limits(self.POWER_LIMIT, self.SPEED_LIMIT) # Set the power and speed limits
+        self.motorB.set_power(0)
+        time.sleep(0.2)
+
+        #motor moving
+        self.motorB.set_dps(self.speed)                              # Set the speed for the motor
+        self.motorB.set_position_relative(rotation)             # Rotate the desired amount of degrees
+
+        self.motorD.set_dps(self.speed)                              # Set the speed for the motor (multiplier to account for drift)
+        self.motorD.set_position_relative(-rotation)             # Rotate the desired amount of degrees
+        time.sleep(sleep_time)
+        
+        self.update(0)
 

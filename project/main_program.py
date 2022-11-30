@@ -81,6 +81,7 @@ while True:
 
         if(selection == "user"):
             user.exit()
+            
 
     except KeyboardInterrupt:
         reset_brick()

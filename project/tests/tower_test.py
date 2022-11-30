@@ -15,7 +15,7 @@ try:
     t = tower.Tower()
     while (True):
         time.sleep(0.25)
-        if ts.is_pressed:
+        if ts.is_pressed():
             print("pressed")
             t.dispense()
 except KeyboardInterrupt:
