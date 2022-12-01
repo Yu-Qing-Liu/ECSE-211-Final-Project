@@ -22,14 +22,14 @@ while True:
         
         #Ask user if he wants to use admin or user mode
         while True:
-            selection = input("Enter <admin> for admin mode, and <user> for user mode\n")
+            selection = input("Enter <tech> for technician mode, and <user> for user mode\n")
             if(selection == "user"):
                 #Initialize User GUI
                 user = User()
                 user.start()
                 grid = Grid(user.get_inputs())
                 break
-            elif(selection == "admin"):
+            elif(selection == "tech"):
                 #Initialize Technician prompt
                 admin = Admin()
                 admin.start()

@@ -2,6 +2,7 @@
 from utils.brick import TouchSensor, wait_ready_sensors
 from utils.brick import EV3ColorSensor,wait_ready_sensors
 from objects.grid import Grid
+import time
 
 class Admin:
     #Constructor
@@ -13,16 +14,16 @@ class Admin:
     def start(self):
 
         wait_ready_sensors(True)
-     
+        """
         while True:    
             if self.cs.get_color_name() != "Unknown":
-                sleep(1.5)
+                time.sleep(1.5)
                 if self.cs.get_color_name() != "Unknown":
-                    sleep(1.5)
+                    time.sleep(1.5)
                     if self.cs.get_color_name() != "Unknown":
                         print("all cubes loaded")
                         break
-                    
+          """          
         while True:
             row_count = 1
             while row_count <= 5:
