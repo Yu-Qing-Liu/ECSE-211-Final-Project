@@ -8,9 +8,9 @@ import math
 class Motor_A:
 
     #class variables
-    wheel_radius = 2.01
+    wheel_radius = 2.06
     wheel_circumference = 2*math.pi*wheel_radius
-    speed = 250 #speedin dps
+    speed =400 #speedin dps
     distancePerCell = 4
 
     POWER_LIMIT = 200       # Power limit = 100%
@@ -27,7 +27,7 @@ class Motor_A:
         #Dummy code for testing
         try:
 
-            distanceToTravel = (4-command)*self.distancePerCell + 7.1
+            distanceToTravel = (4-command)*self.distancePerCell + 9.7
             print(distanceToTravel)
             numberOfRotations = distanceToTravel/self.wheel_circumference
             rotation = numberOfRotations * 360
@@ -42,7 +42,7 @@ class Motor_A:
             #motor moving forward
             self.motor.set_dps(self.speed)                              # Set the speed for the motor
             self.motor.set_position_relative(rotation)             # Rotate the desired amount of degrees
-            time.sleep(sleep_time+0.2)
+            time.sleep(sleep_time)
             #motor moving backward
             self.motor.set_dps(self.speed)                              # Set the speed for the motor
             self.motor.set_position_relative(-(rotation + 45))             # Rotate the desired amount of degrees

@@ -10,17 +10,12 @@ import time
 wait_ready_sensors(True)
 
 try:
-    #Initiate motors
-    motor_b = motor_b.Motor_B()
-    #command to push to row 1
-    motor_b.move(1)
-    time.sleep(0.5)
-    motor_b.move(2)
-    time.sleep(0.5)
-    motor_b.move(3)
-    time.sleep(0.5)
-    motor_b.move(4)
-#   motor_b.moveBack()
+   motor_b = motor_b.Motor_B()
+   motor_b.move(1)
+   motor_b.move(2)
+   motor_b.move(3)
+   motor_b.move(4)
+   motor_b.moveBack()
 except KeyboardInterrupt:
     reset_brick()
     exit(0)

@@ -14,7 +14,7 @@ class Admin:
     def start(self):
 
         wait_ready_sensors(True)
-        """
+        
         while True:    
             if self.cs.get_color_name() != "Unknown":
                 time.sleep(1.5)
@@ -23,7 +23,7 @@ class Admin:
                     if self.cs.get_color_name() != "Unknown":
                         print("all cubes loaded")
                         break
-          """          
+                  
         while True:
             row_count = 1
             while row_count <= 5:

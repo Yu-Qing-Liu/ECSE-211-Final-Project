@@ -30,7 +30,7 @@ class Motor_B:
             
     def move(self,command):
         print("Moving the robot to position:", command,"From position",self.position)
-        distanceToTravel = 4.5*(command - self.position)
+        distanceToTravel = 4.45*(command - self.position)
         numberOfRotations = distanceToTravel/self.wheel_circumference
         rotation = numberOfRotations * 360
         sleep_time = rotation/self.speed
@@ -45,7 +45,7 @@ class Motor_B:
         time.sleep(0.2)
 
         #motor moving
-        self.motorB.set_dps(self.speed)                              # Set the speed for the motor
+        self.motorB.set_dps(self.speed*1.3)                              # Set the speed for the motor
         self.motorB.set_position_relative(-rotation)             # Rotate the desired amount of degrees
         self.motorD.set_dps(self.speed)                              # Set the speed for the motor (multiplier to account for drift)
         self.motorD.set_position_relative(rotation)             # Rotate the desired amount of degrees
@@ -56,7 +56,7 @@ class Motor_B:
                 
     def moveBack(self):
         print("Moving the robot back to its initial position")
-        distanceToTravel = 4.5*(self.position)
+        distanceToTravel = 4*(self.position)
         numberOfRotations = distanceToTravel/self.wheel_circumference
         rotation = numberOfRotations * 360
         sleep_time = rotation/self.speed

@@ -10,22 +10,20 @@ from threading import Thread
 from time import sleep
 
 #Global variables
-close = False
 status = False
 
 #US_sensor thread
 def run(status_message):
     cs = EV3ColorSensor(1)
     wait_ready_sensors(True)
-    global close
     global status
-    
     try:
         while True:
-            print(cs.get_color_name() != "Unknown")
             if cs.get_color_name() != "Unknown":
+                print(cs.get_color_name())
                 sleep(1.5)
                 if cs.get_color_name() != "Unknown":
+                    print(cs.get_color_name())
                     status_message.update_message("Status: Ready")
                     status_message.message.configure(fg="green")
                     status = True
@@ -34,7 +32,6 @@ def run(status_message):
                 status_message.message.configure(fg="red")
                 status = False
             sleep(1)
-        reset_brick()
     except BaseException as error:
         print(error) # For debugging
 
@@ -57,8 +54,6 @@ class User:
 
     #Initialize the gui
     def start(self):
-        global status
-        global close
 
         #Start us thread
         us_thread = Thread(target=run,args=(self.status_message,))
@@ -89,14 +84,11 @@ class User:
 
         #Start button on_click function
         def on_click():
-            global close
             global status
             grid = Grid(self.inputs)
             self.error_message.message.place(x=50,y=450)
             if status:
                 if grid.is_valid() == 0:
-                    close = True
-                    #us_thread.join()
                     self.root.quit()
                 elif grid.is_valid() == 1:
                     m = "Sorry, you have exceeded the amount of cubes available, please try again"

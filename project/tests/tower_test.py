@@ -20,4 +20,4 @@ try:
             t.dispense()
 except KeyboardInterrupt:
     reset_brick()
-    exit(0)
+    exit(0) 

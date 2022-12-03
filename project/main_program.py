@@ -22,14 +22,14 @@ while True:
         
         #Ask user if he wants to use admin or user mode
         while True:
-            selection = input("Enter <tech> for technician mode, and <user> for user mode\n")
+            selection = input("Enter <admin> for admin mode, and <user> for user mode\n")
             if(selection == "user"):
                 #Initialize User GUI
                 user = User()
                 user.start()
                 grid = Grid(user.get_inputs())
                 break
-            elif(selection == "tech"):
+            elif(selection == "admin"):
                 #Initialize Technician prompt
                 admin = Admin()
                 admin.start()
@@ -78,7 +78,8 @@ while True:
                 motor_a.push(command.get_x())
                 #we must update the temp value of y to the next row before continuing
                 y_init = command.get_y()
-
+        
+        motor_b.moveBack()
         if(selection == "user"):
             user.exit()
             

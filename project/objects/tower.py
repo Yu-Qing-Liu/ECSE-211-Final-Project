@@ -7,8 +7,8 @@ class Tower:
     #class variables
     POWER_LIMIT = 100       # Power limit = 100%
     SPEED_LIMIT = 720      # Speed limit = 720 deg per sec (dps)
-    rotation =365
-    speed = 250
+    rotation =190
+    speed = 350
     sleep_time = rotation/speed
     x = False
 
@@ -33,7 +33,13 @@ class Tower:
             self.motor.set_dps(self.speed) 
             self.motor.set_position_relative(self.rotation)
             time.sleep(self.sleep_time)
-           
+            
+            self.motor.set_dps(self.speed) 
+            self.motor.set_position_relative(-self.rotation)
+            time.sleep(self.sleep_time)
+        
+
+
             self.motor.set_power(0)
         except IOError as error:
             print(error)
